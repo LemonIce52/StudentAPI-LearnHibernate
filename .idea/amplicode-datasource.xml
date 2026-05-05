@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AmplicodeJpaDataSourceConfig">
+    <data-sources>
+      <data-source id="ead39082-59c2-4afc-9853-71e4a81cca1c" name="hibernate-tren" url="jdbc:postgresql://localhost:5432/postgres" driverClass="org.postgresql.Driver" />
+    </data-sources>
+    <option name="preferredDataSourceId" value="ead39082-59c2-4afc-9853-71e4a81cca1c" />
+  </component>
+</project>

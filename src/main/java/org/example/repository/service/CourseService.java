@@ -24,17 +24,6 @@ public class CourseService {
         });
     }
 
-    public Course addStudentInCourse(Long idCourse, Student student) {
-        return transactionalHelperService.applyTransactional(session -> {
-            Course course =  session.createQuery(
-                    "select c from Course c left join fetch c.studentsList where c.id = :id",
-                    Course.class
-            ).setParameter("id", idCourse).getSingleResult();
-            course.getStudentsList().add(student);
-            return course;
-        });
-    }
-
     public Course updateCourse(Course course) {
         return transactionalHelperService.applyTransactional(session -> {
             return session.merge(course);

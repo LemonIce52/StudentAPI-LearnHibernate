@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.entities.Group;
 import org.example.entities.Profile;
 import org.example.entities.Student;
 import org.hibernate.SessionFactory;
@@ -17,6 +18,7 @@ public class HibernateConfiguration {
                 .addPackage("org.example")
                 .addAnnotatedClass(Student.class)
                 .addAnnotatedClass(Profile.class)
+                .addAnnotatedClass(Group.class)
                 .setProperty("hibernate.connection.driver_class", "org.postgresql.Driver")
                 .setProperty("hibernate.connection.url", "jdbc:postgresql://localhost:5432/postgres")
                 .setProperty("hibernate.connection.username", "postgres")

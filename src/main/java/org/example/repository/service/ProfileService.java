@@ -1,7 +1,6 @@
 package org.example.repository.service;
 
 import org.example.repository.entities.Profile;
-import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,12 +8,10 @@ import java.util.List;
 @Service
 public class ProfileService {
 
-    private final SessionFactory sessionFactory;
     private final TransactionalHelperService transactionalHelperService;
     private final NoModifySessionHelper noModifySessionHelper;
 
-    public ProfileService(SessionFactory sessionFactory, TransactionalHelperService transactionalHelperService, NoModifySessionHelper noModifySessionHelper) {
-        this.sessionFactory = sessionFactory;
+    public ProfileService(TransactionalHelperService transactionalHelperService, NoModifySessionHelper noModifySessionHelper) {
         this.transactionalHelperService = transactionalHelperService;
         this.noModifySessionHelper = noModifySessionHelper;
     }

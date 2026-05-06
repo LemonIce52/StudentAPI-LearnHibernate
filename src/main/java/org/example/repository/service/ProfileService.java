@@ -1,7 +1,6 @@
-package org.example.service;
+package org.example.repository.service;
 
-import org.example.entities.Profile;
-import org.hibernate.Session;
+import org.example.repository.entities.Profile;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +11,12 @@ public class ProfileService {
 
     private final SessionFactory sessionFactory;
     private final TransactionalHelperService transactionalHelperService;
+    private final NoModifySessionHelper noModifySessionHelper;
 
-    public ProfileService(SessionFactory sessionFactory, TransactionalHelperService transactionalHelperService) {
+    public ProfileService(SessionFactory sessionFactory, TransactionalHelperService transactionalHelperService, NoModifySessionHelper noModifySessionHelper) {
         this.sessionFactory = sessionFactory;
         this.transactionalHelperService = transactionalHelperService;
+        this.noModifySessionHelper = noModifySessionHelper;
     }
 
     public Profile saveProfile(Profile profile) {
@@ -39,19 +40,17 @@ public class ProfileService {
     }
 
     public Profile getProfile(Long id) {
-        Session session = sessionFactory.openSession();
-        Profile profile = session.find(Profile.class, id);
-        session.close();
-        return profile;
+        return noModifySessionHelper.applySession(session -> {
+           return session.find(Profile.class, id);
+        });
     }
 
     public List<Profile> getAllProfiles() {
-        Session session = sessionFactory.openSession();
-        List<Profile> profiles = session.createQuery(
-                "select p from Profile p",
-                Profile.class
-        ).list();
-        session.close();
-        return profiles;
+        return noModifySessionHelper.applySession(session -> {
+           return session.createQuery(
+                   "select p from Profile p",
+                   Profile.class
+           ).list();
+        });
     }
 }

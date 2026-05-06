@@ -1,7 +1,6 @@
-package org.example.service;
+package org.example.repository.service;
 
-import org.example.entities.Group;
-import org.hibernate.Session;
+import org.example.repository.entities.Group;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +10,12 @@ import java.util.List;
 public class GroupService {
 
     private final TransactionalHelperService transactionalHelperService;
+    private final NoModifySessionHelper noModifySessionHelper;
     private final SessionFactory sessionFactory;
 
-    public GroupService(TransactionalHelperService transactionalHelperService, SessionFactory sessionFactory) {
+    public GroupService(TransactionalHelperService transactionalHelperService, NoModifySessionHelper noModifySessionHelper, SessionFactory sessionFactory) {
         this.transactionalHelperService = transactionalHelperService;
+        this.noModifySessionHelper = noModifySessionHelper;
         this.sessionFactory = sessionFactory;
     }
 
@@ -39,27 +40,20 @@ public class GroupService {
     }
 
     public Group getGroup(Long id) {
-        try (Session session = sessionFactory.openSession()) {
-            return session.find(Group.class, id);
-        }
+        return noModifySessionHelper.applySession(session -> {
+            return session.createQuery(
+                    "select g from Group g left join fetch g.students s left join fetch s.profile where g.id = :id",
+                    Group.class
+            ).setParameter("id", id).getSingleResult();
+        });
     }
 
     public List<Group> getAllGroup() {
-        try (Session session = sessionFactory.openSession()) {
+        return noModifySessionHelper.applySession(session -> {
             return session.createQuery(
                     "select g from Group g",
                     Group.class
             ).list();
-        }
+        });
     }
-
-    public Group getGroupWithStudents(Long id) {
-        try (Session session = sessionFactory.openSession()) {
-            return session.createQuery(
-                    "select g from Group g join fetch g.students where g.id = :id",
-                    Group.class
-            ).setParameter("id", id).getSingleResult();
-        }
-    }
-
 }

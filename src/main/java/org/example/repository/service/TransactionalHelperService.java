@@ -1,4 +1,4 @@
-package org.example.service;
+package org.example.repository.service;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

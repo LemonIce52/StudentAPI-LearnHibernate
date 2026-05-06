@@ -1,7 +1,6 @@
-package org.example.service;
+package org.example.repository.service;
 
-import org.example.entities.Student;
-import org.hibernate.Session;
+import org.example.repository.entities.Student;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +11,12 @@ public class StudentService {
 
     private final SessionFactory sessionFactory;
     private final TransactionalHelperService transactionalHelperService;
+    private final NoModifySessionHelper noModifySessionHelper;
 
-    public StudentService(SessionFactory sessionFactory, TransactionalHelperService transactionalHelperService) {
+    public StudentService(SessionFactory sessionFactory, TransactionalHelperService transactionalHelperService, NoModifySessionHelper noModifySessionHelper) {
         this.sessionFactory = sessionFactory;
         this.transactionalHelperService = transactionalHelperService;
+        this.noModifySessionHelper = noModifySessionHelper;
     }
 
     public Student saveStudent(Student student) {
@@ -39,20 +40,21 @@ public class StudentService {
     }
 
     public Student getStudent(Long id) {
-        Session session = sessionFactory.openSession();
-        Student student = session.find(Student.class, id);
-        session.close();
-        return student;
+        return noModifySessionHelper.applySession(session -> {
+            return session.createQuery(
+                    "select s from Student s left join fetch s.profile left join fetch s.group where s.id = :id",
+                    Student.class
+            ).setParameter("id", id).getSingleResult();
+        });
     }
 
     public List<Student> getAllStudents() {
-        Session session = sessionFactory.openSession();
-        List<Student> allStudents = session.createQuery(
-                "select s from Student s",
-                Student.class
-                ).list();
-        session.close();
-        return allStudents;
+        return noModifySessionHelper.applySession(session -> {
+            return session.createQuery(
+                    "select s from Student s",
+                    Student.class
+            ).list();
+        });
     }
 
 }

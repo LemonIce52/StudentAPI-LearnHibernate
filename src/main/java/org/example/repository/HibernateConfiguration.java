@@ -1,8 +1,9 @@
-package org.example;
+package org.example.repository;
 
-import org.example.entities.Group;
-import org.example.entities.Profile;
-import org.example.entities.Student;
+import org.example.repository.entities.Course;
+import org.example.repository.entities.Group;
+import org.example.repository.entities.Profile;
+import org.example.repository.entities.Student;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +20,7 @@ public class HibernateConfiguration {
                 .addAnnotatedClass(Student.class)
                 .addAnnotatedClass(Profile.class)
                 .addAnnotatedClass(Group.class)
+                .addAnnotatedClass(Course.class)
                 .setProperty("hibernate.connection.driver_class", "org.postgresql.Driver")
                 .setProperty("hibernate.connection.url", "jdbc:postgresql://localhost:5432/postgres")
                 .setProperty("hibernate.connection.username", "postgres")

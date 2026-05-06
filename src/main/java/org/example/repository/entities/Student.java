@@ -1,6 +1,8 @@
-package org.example.entities;
+package org.example.repository.entities;
 
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "students")
@@ -25,9 +27,12 @@ public class Student {
     @OneToOne(mappedBy = "student", cascade = CascadeType.REMOVE)
     private Profile profile;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id")
     private Group group;
+
+    @ManyToMany(mappedBy = "studentsList")
+    private List<Course> courseList;
 
     public Student() {}
 
@@ -35,6 +40,14 @@ public class Student {
         this.name = name;
         this.age = age;
         this.group = group;
+    }
+
+    public List<Course> getCourseList() {
+        return courseList;
+    }
+
+    public void setCourseList(List<Course> courseList) {
+        this.courseList = courseList;
     }
 
     public Group getGroup() {
@@ -75,14 +88,5 @@ public class Student {
 
     public void setAge(Integer age) {
         this.age = age;
-    }
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                '}';
     }
 }

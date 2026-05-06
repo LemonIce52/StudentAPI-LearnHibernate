@@ -1,6 +1,8 @@
-package org.example.entities;
+package org.example.repository.entities;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "profiles")
@@ -15,6 +17,12 @@ public class Profile {
             nullable = false
     )
     private String description;
+
+    @Column(
+            name = "last_seen_profile",
+            nullable = false
+    )
+    private LocalDateTime lastSeenProfile;
 
     @OneToOne
     @JoinColumn(
@@ -44,6 +52,14 @@ public class Profile {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public LocalDateTime getLastSeenProfile() {
+        return lastSeenProfile;
+    }
+
+    public void setLastSeenProfile(LocalDateTime lastSeenProfile) {
+        this.lastSeenProfile = lastSeenProfile;
     }
 
     public Student getStudent() {

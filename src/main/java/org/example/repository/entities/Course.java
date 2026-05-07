@@ -3,6 +3,7 @@ package org.example.repository.entities;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "courses")
@@ -30,7 +31,7 @@ public class Course {
             joinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id")
     )
-    private List<Student> studentsList;
+    private Set<Student> studentsList;
 
     public Course() {}
 
@@ -63,11 +64,11 @@ public class Course {
         this.courseType = courseType;
     }
 
-    public List<Student> getStudentsList() {
+    public Set<Student> getStudentsList() {
         return studentsList;
     }
 
-    public void setStudentsList(List<Student> studentsList) {
+    public void setStudentsList(Set<Student> studentsList) {
         this.studentsList = studentsList;
     }
 }

@@ -39,7 +39,7 @@ public class GroupDBService {
     public Group getGroup(Long id) {
         return noModifySessionHelper.applySession(session -> {
             return session.createQuery(
-                    "select g from Group g left join fetch g.students s left join fetch s.profile where g.id = :id",
+                    "select g from Group g left join fetch g.students s left join fetch s.profile left join fetch s.courseList where g.id = :id",
                     Group.class
             ).setParameter("id", id).getSingleResult();
         });

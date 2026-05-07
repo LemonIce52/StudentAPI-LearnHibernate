@@ -3,6 +3,7 @@ package org.example.repository.entities;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "students")
@@ -32,7 +33,7 @@ public class Student {
     private Group group;
 
     @ManyToMany(mappedBy = "studentsList")
-    private List<Course> courseList;
+    private Set<Course> courseList;
 
     public Student() {}
 
@@ -42,11 +43,11 @@ public class Student {
         this.group = group;
     }
 
-    public List<Course> getCourseList() {
+    public Set<Course> getCourseList() {
         return courseList;
     }
 
-    public void setCourseList(List<Course> courseList) {
+    public void setCourseList(Set<Course> courseList) {
         this.courseList = courseList;
     }
 

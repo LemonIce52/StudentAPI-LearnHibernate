@@ -3,6 +3,7 @@ package org.example.repository.entities;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "student_group")
@@ -25,7 +26,7 @@ public class Group {
     private Long graduationYear;
 
     @OneToMany(mappedBy = "group")
-    private List<Student> students;
+    private Set<Student> students;
 
     public Group() {
     }
@@ -59,11 +60,11 @@ public class Group {
         this.graduationYear = graduationYear;
     }
 
-    public List<Student> getStudents() {
+    public Set<Student> getStudents() {
         return students;
     }
 
-    public void setStudents(List<Student> students) {
+    public void setStudents(Set<Student> students) {
         this.students = students;
     }
 }

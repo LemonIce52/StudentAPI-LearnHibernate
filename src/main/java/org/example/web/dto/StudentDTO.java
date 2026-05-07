@@ -7,7 +7,7 @@ public record StudentDTO(
         String name,
         Integer age,
         ProfileDTO profile,
-        String group,
+        Long groupId,
         List<String> courseList
 ) {
 }

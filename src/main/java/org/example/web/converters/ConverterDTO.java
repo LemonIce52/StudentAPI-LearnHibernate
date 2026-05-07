@@ -1,14 +1,17 @@
 package org.example.web.converters;
 
 import org.example.repository.entities.Course;
+import org.example.repository.entities.Group;
 import org.example.repository.entities.Profile;
 import org.example.repository.entities.Student;
+import org.example.web.dto.GroupDTO;
 import org.example.web.dto.ProfileDTO;
 import org.example.web.dto.StudentDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @Component
 public class ConverterDTO {
@@ -19,8 +22,10 @@ public class ConverterDTO {
 
         List<String> courses = new ArrayList<>();
 
-        for (Course course : studentDB.getCourseList()) {
-            courses.add(course.getName());
+        if (studentDB.getCourseList() != null) {
+            for (Course course : studentDB.getCourseList()) {
+                courses.add(course.getName());
+            }
         }
 
         return new StudentDTO(
@@ -28,7 +33,7 @@ public class ConverterDTO {
                 studentDB.getName(),
                 studentDB.getAge(),
                 profileStudentDTO,
-                studentDB.getGroup().getName(),
+                studentDB.getGroup().getId(),
                 courses
         );
     }
@@ -39,6 +44,23 @@ public class ConverterDTO {
                 profileDB.getDescription(),
                 profileDB.getLastSeenProfile(),
                 profileDB.getStudent().getId()
+        );
+    }
+
+    public GroupDTO convertGroupToDto(Group savedGroup) {
+        List<StudentDTO> studentList = new ArrayList<>();
+
+        if (savedGroup.getStudents() != null) {
+            for (Student student : savedGroup.getStudents()) {
+                studentList.add(convertStudentToDto(student));
+            }
+        }
+
+        return new GroupDTO(
+                savedGroup.getId(),
+                savedGroup.getName(),
+                savedGroup.getGraduationYear(),
+                studentList
         );
     }
 }

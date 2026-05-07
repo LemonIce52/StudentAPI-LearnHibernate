@@ -6,12 +6,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ProfileService {
+public class ProfileDBService {
 
     private final TransactionalHelperService transactionalHelperService;
     private final NoModifySessionHelper noModifySessionHelper;
 
-    public ProfileService(TransactionalHelperService transactionalHelperService, NoModifySessionHelper noModifySessionHelper) {
+    public ProfileDBService(TransactionalHelperService transactionalHelperService, NoModifySessionHelper noModifySessionHelper) {
         this.transactionalHelperService = transactionalHelperService;
         this.noModifySessionHelper = noModifySessionHelper;
     }

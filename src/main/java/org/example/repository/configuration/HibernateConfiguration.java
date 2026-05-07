@@ -1,4 +1,4 @@
-package org.example.repository;
+package org.example.repository.configuration;
 
 import org.example.repository.entities.Course;
 import org.example.repository.entities.Group;
@@ -26,7 +26,7 @@ public class HibernateConfiguration {
                 .setProperty("hibernate.connection.username", "postgres")
                 .setProperty("hibernate.connection.password", "root")
                 .setProperty("hibernate.show_sql", "true")
-                .setProperty("hibernate.hbm2ddl.auto", "create-drop");
+                .setProperty("hibernate.hbm2ddl.auto", "update");
 
         return configuration.buildSessionFactory();
     }

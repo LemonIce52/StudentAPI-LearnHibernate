@@ -6,12 +6,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class StudentService {
+public class StudentDBService {
 
     private final TransactionalHelperService transactionalHelperService;
     private final NoModifySessionHelper noModifySessionHelper;
 
-    public StudentService(TransactionalHelperService transactionalHelperService, NoModifySessionHelper noModifySessionHelper) {
+    public StudentDBService(TransactionalHelperService transactionalHelperService, NoModifySessionHelper noModifySessionHelper) {
         this.transactionalHelperService = transactionalHelperService;
         this.noModifySessionHelper = noModifySessionHelper;
     }
@@ -39,7 +39,7 @@ public class StudentService {
     public Student getStudent(Long id) {
         return noModifySessionHelper.applySession(session -> {
             return session.createQuery(
-                    "select s from Student s left join fetch s.profile left join fetch s.group where s.id = :id",
+                    "select s from Student s left join fetch s.profile left join fetch s.group left join fetch s.courseList where s.id = :id",
                     Student.class
             ).setParameter("id", id).getSingleResult();
         });

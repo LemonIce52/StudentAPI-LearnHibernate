@@ -1,18 +1,17 @@
 package org.example.repository.service;
 
 import org.example.repository.entities.Course;
-import org.example.repository.entities.Student;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class CourseService {
+public class CourseDBService {
 
     private final TransactionalHelperService transactionalHelperService;
     private final NoModifySessionHelper noModifySessionHelper;
 
-    public CourseService(TransactionalHelperService transactionalHelperService, NoModifySessionHelper noModifySessionHelper) {
+    public CourseDBService(TransactionalHelperService transactionalHelperService, NoModifySessionHelper noModifySessionHelper) {
         this.transactionalHelperService = transactionalHelperService;
         this.noModifySessionHelper = noModifySessionHelper;
     }

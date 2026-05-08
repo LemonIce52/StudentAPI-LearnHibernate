@@ -1,5 +1,6 @@
 package org.example.web.converters;
 
+import jakarta.persistence.Persistence;
 import org.example.repository.entities.Course;
 import org.example.repository.entities.Group;
 import org.example.repository.entities.Profile;
@@ -22,10 +23,13 @@ public class ConverterDTO {
 
         List<String> courses = new ArrayList<>();
 
-        if (studentDB.getCourseList() != null) {
-            for (Course course : studentDB.getCourseList()) {
-                courses.add(course.getName());
-            }
+        boolean isLoadedCourses = Persistence.getPersistenceUtil().isLoaded(studentDB, "courseList");
+
+        if (isLoadedCourses && studentDB.getCourseList() != null) {
+            courses = studentDB.getCourseList()
+                    .stream()
+                    .map(Course::getName)
+                    .toList();
         }
 
         return new StudentDTO(
@@ -50,10 +54,13 @@ public class ConverterDTO {
     public GroupDTO convertGroupToDto(Group savedGroup) {
         List<StudentDTO> studentList = new ArrayList<>();
 
-        if (savedGroup.getStudents() != null) {
-            for (Student student : savedGroup.getStudents()) {
-                studentList.add(convertStudentToDto(student));
-            }
+        boolean isLoadedStudentsList = Persistence.getPersistenceUtil().isLoaded(savedGroup, "students");
+
+        if (isLoadedStudentsList && savedGroup.getStudents() != null) {
+            studentList = savedGroup.getStudents()
+                    .stream()
+                    .map(this::convertStudentToDto)
+                    .toList();
         }
 
         return new GroupDTO(

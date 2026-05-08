@@ -6,15 +6,15 @@
   </component>
   <component name="DBNavigator.Project.DataEditorManager">
     <record-view-column-sorting-type value="BY_INDEX" />
-    <value-preview-text-wrapping value="true" />
+    <value-preview-text-wrapping value="false" />
     <value-preview-pinned value="false" />
   </component>
   <component name="DBNavigator.Project.DatabaseAssistantManager">
     <assistants>
-      <assistant-state connection-id="d2260b12-b0d1-4334-a267-10084ea69fa9" assistant-type="SELECT_AI" default-profile-name="" selected-chat-id="" availability="UNAVAILABLE" acknowledgement="NONE">
+      <assistant-state connection-id="d2260b12-b0d1-4334-a267-10084ea69fa9" assistant-type="PUBLIC" default-profile-name="" selected-chat-id="" availability="AVAILABLE" acknowledgement="NONE" selected="true">
         <tools />
       </assistant-state>
-      <assistant-state connection-id="d2260b12-b0d1-4334-a267-10084ea69fa9" assistant-type="PUBLIC" default-profile-name="" selected-chat-id="" availability="AVAILABLE" acknowledgement="NONE" selected="true">
+      <assistant-state connection-id="d2260b12-b0d1-4334-a267-10084ea69fa9" assistant-type="SELECT_AI" default-profile-name="" selected-chat-id="" availability="UNAVAILABLE" acknowledgement="NONE">
         <tools />
       </assistant-state>
     </assistants>
@@ -46,6 +46,9 @@
     <connection id="d2260b12-b0d1-4334-a267-10084ea69fa9" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="d2260b12-b0d1-4334-a267-10084ea69fa9" dataset="public.students" active-filter-id="a164f9a0-44e2-433f-ad3b-0d89af9a57e1">
+      <filter id="a164f9a0-44e2-433f-ad3b-0d89af9a57e1" name="Filter" temporary="false" custom-name="false" type="basic" join-type="AND" />
+    </filter-actions>
     <filter-actions connection-id="d2260b12-b0d1-4334-a267-10084ea69fa9" dataset="public.student_group" active-filter-id="f484e068-655e-4488-8fb7-1fca08b6e90a">
       <filter id="f484e068-655e-4488-8fb7-1fca08b6e90a" name="Filter" temporary="false" custom-name="false" type="basic" join-type="AND" />
     </filter-actions>

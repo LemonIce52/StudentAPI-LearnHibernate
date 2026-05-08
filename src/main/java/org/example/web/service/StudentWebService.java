@@ -7,6 +7,7 @@ import org.example.repository.service.StudentDBService;
 import org.example.web.converters.ConverterDTO;
 import org.example.web.dto.CreateStudentDTO;
 import org.example.web.dto.StudentDTO;
+import org.example.web.dto.UpdateStudentDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -32,13 +33,10 @@ public class StudentWebService {
 
     public List<StudentDTO> getAllStudents() {
         List<Student> studentDbList = studentDBService.getAllStudents();
-        List<StudentDTO> studentDTOList = new ArrayList<>();
-
-        for (Student student : studentDbList) {
-            studentDTOList.add(converterDTO.convertStudentToDto(student));
-        }
-
-        return studentDTOList;
+        return studentDbList
+                .stream()
+                .map(converterDTO::convertStudentToDto)
+                .toList();
     }
 
     public StudentDTO createStudent(CreateStudentDTO createStudentDTO) {
@@ -50,5 +48,25 @@ public class StudentWebService {
 
     public void deleteStudent(Long id) {
         studentDBService.deleteStudent(id);
+    }
+
+    public StudentDTO updateStudent(UpdateStudentDTO updateStudent) {
+        Student student = studentDBService.getStudent(updateStudent.id());
+
+        if (updateStudent.name() != null) {
+            student.setName(updateStudent.name());
+        }
+
+        if (updateStudent.age() != null) {
+            student.setAge(updateStudent.age());
+        }
+
+        if (updateStudent.groupId() != null) {
+            Group groupStudent = groupDBService.getGroup(updateStudent.groupId());
+            student.setGroup(groupStudent);
+        }
+
+        Student updatebleStudent = studentDBService.updateStudent(student);
+        return converterDTO.convertStudentToDto(updatebleStudent);
     }
 }

@@ -2,6 +2,7 @@ package org.example.web.controllers;
 
 import org.example.web.dto.CreateStudentDTO;
 import org.example.web.dto.StudentDTO;
+import org.example.web.dto.UpdateStudentDTO;
 import org.example.web.service.StudentWebService;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,7 @@ public class StudentController {
     }
 
     @GetMapping
-    public List<StudentDTO> getVoid() {
+    public List<StudentDTO> getAllStudents() {
         return studentWebService.getAllStudents();
     }
 
@@ -34,6 +35,13 @@ public class StudentController {
             @RequestBody CreateStudentDTO student
     ) {
         return studentWebService.createStudent(student);
+    }
+
+    @PutMapping("/update")
+    public StudentDTO updateStudent(
+            @RequestBody UpdateStudentDTO updateStudent
+    ) {
+        return studentWebService.updateStudent(updateStudent);
     }
 
     @DeleteMapping("/delete/{id}")

@@ -33,8 +33,9 @@ public class Profile {
 
     public Profile() {}
 
-    public Profile(String description, Student student) {
+    public Profile(String description, LocalDateTime lastSeenProfile, Student student) {
         this.description = description;
+        this.lastSeenProfile = lastSeenProfile;
         this.student = student;
     }
 

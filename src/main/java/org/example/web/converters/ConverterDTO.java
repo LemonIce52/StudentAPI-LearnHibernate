@@ -5,6 +5,7 @@ import org.example.repository.entities.Course;
 import org.example.repository.entities.Group;
 import org.example.repository.entities.Profile;
 import org.example.repository.entities.Student;
+import org.example.web.dto.CourseDTO;
 import org.example.web.dto.GroupDTO;
 import org.example.web.dto.ProfileDTO;
 import org.example.web.dto.StudentDTO;
@@ -21,14 +22,14 @@ public class ConverterDTO {
         ProfileDTO profileStudentDTO = studentDB.getProfile() != null
                 ? convertProfileToDto(studentDB.getProfile()) : null;
 
-        List<String> courses = new ArrayList<>();
+        List<CourseDTO> courses = new ArrayList<>();
 
         boolean isLoadedCourses = Persistence.getPersistenceUtil().isLoaded(studentDB, "courseList");
 
         if (isLoadedCourses && studentDB.getCourseList() != null) {
             courses = studentDB.getCourseList()
                     .stream()
-                    .map(Course::getName)
+                    .map(this::convertCourseToDto)
                     .toList();
         }
 
@@ -67,6 +68,26 @@ public class ConverterDTO {
                 savedGroup.getId(),
                 savedGroup.getName(),
                 savedGroup.getGraduationYear(),
+                studentList
+        );
+    }
+
+    public CourseDTO convertCourseToDto(Course courseDB) {
+        List<StudentDTO> studentList = new ArrayList<>();
+
+        boolean isLoadedStudents = Persistence.getPersistenceUtil().isLoaded(courseDB, "studentsList");
+
+        if (isLoadedStudents && courseDB.getStudentsList() != null) {
+            studentList = courseDB.getStudentsList()
+                    .stream()
+                    .map(this::convertStudentToDto)
+                    .toList();
+        }
+
+        return new CourseDTO(
+                courseDB.getId(),
+                courseDB.getName(),
+                courseDB.getCourseType(),
                 studentList
         );
     }

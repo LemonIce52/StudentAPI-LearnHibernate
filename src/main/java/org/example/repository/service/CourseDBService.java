@@ -47,7 +47,7 @@ public class CourseDBService {
     public List<Course> getAllCourse() {
         return noModifySessionHelper.applySession(session -> {
             return session.createQuery(
-                    "select c from Course c left join fetch c.studentsList",
+                    "select c from Course c",
                     Course.class
             ).list();
         });

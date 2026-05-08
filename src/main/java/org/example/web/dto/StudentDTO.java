@@ -8,6 +8,6 @@ public record StudentDTO(
         Integer age,
         ProfileDTO profile,
         Long groupId,
-        List<String> courseList
+        List<CourseDTO> courseList
 ) {
 }

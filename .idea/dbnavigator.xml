@@ -11,10 +11,10 @@
   </component>
   <component name="DBNavigator.Project.DatabaseAssistantManager">
     <assistants>
-      <assistant-state connection-id="d2260b12-b0d1-4334-a267-10084ea69fa9" assistant-type="PUBLIC" default-profile-name="" selected-chat-id="" availability="AVAILABLE" acknowledgement="NONE" selected="true">
+      <assistant-state connection-id="d2260b12-b0d1-4334-a267-10084ea69fa9" assistant-type="SELECT_AI" default-profile-name="" selected-chat-id="" availability="UNAVAILABLE" acknowledgement="NONE">
         <tools />
       </assistant-state>
-      <assistant-state connection-id="d2260b12-b0d1-4334-a267-10084ea69fa9" assistant-type="SELECT_AI" default-profile-name="" selected-chat-id="" availability="UNAVAILABLE" acknowledgement="NONE">
+      <assistant-state connection-id="d2260b12-b0d1-4334-a267-10084ea69fa9" assistant-type="PUBLIC" default-profile-name="" selected-chat-id="" availability="AVAILABLE" acknowledgement="NONE" selected="true">
         <tools />
       </assistant-state>
     </assistants>
@@ -46,11 +46,20 @@
     <connection id="d2260b12-b0d1-4334-a267-10084ea69fa9" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="d2260b12-b0d1-4334-a267-10084ea69fa9" dataset="public.students_list" active-filter-id="92c6f436-3288-41be-aa5e-f347dcd97c01">
+      <filter id="92c6f436-3288-41be-aa5e-f347dcd97c01" name="Filter" temporary="false" custom-name="false" type="basic" join-type="AND" />
+    </filter-actions>
+    <filter-actions connection-id="d2260b12-b0d1-4334-a267-10084ea69fa9" dataset="public.profiles" active-filter-id="5f7a20cf-23c5-4ae2-a915-4b7de39dc762">
+      <filter id="5f7a20cf-23c5-4ae2-a915-4b7de39dc762" name="Filter" temporary="false" custom-name="false" type="basic" join-type="AND" />
+    </filter-actions>
     <filter-actions connection-id="d2260b12-b0d1-4334-a267-10084ea69fa9" dataset="public.students" active-filter-id="a164f9a0-44e2-433f-ad3b-0d89af9a57e1">
       <filter id="a164f9a0-44e2-433f-ad3b-0d89af9a57e1" name="Filter" temporary="false" custom-name="false" type="basic" join-type="AND" />
     </filter-actions>
     <filter-actions connection-id="d2260b12-b0d1-4334-a267-10084ea69fa9" dataset="public.student_group" active-filter-id="f484e068-655e-4488-8fb7-1fca08b6e90a">
       <filter id="f484e068-655e-4488-8fb7-1fca08b6e90a" name="Filter" temporary="false" custom-name="false" type="basic" join-type="AND" />
+    </filter-actions>
+    <filter-actions connection-id="d2260b12-b0d1-4334-a267-10084ea69fa9" dataset="public.courses" active-filter-id="a9feee9a-e7e5-40dd-9446-477aedeb565d">
+      <filter id="a9feee9a-e7e5-40dd-9446-477aedeb565d" name="Filter" temporary="false" custom-name="false" type="basic" join-type="AND" />
     </filter-actions>
   </component>
   <component name="DBNavigator.Project.ObjectQuickFilterManager">

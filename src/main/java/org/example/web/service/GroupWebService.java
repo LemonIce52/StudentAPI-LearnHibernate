@@ -22,6 +22,7 @@ public class GroupWebService {
     }
 
     public GroupDTO getGroup(Long id) {
+        if (id < 0) throw new IllegalArgumentException("id can't must be less zero!");
         return converterDTO.convertGroupToDto(groupDBService.getGroup(id));
     }
 
@@ -40,6 +41,7 @@ public class GroupWebService {
     }
 
     public void deleteGroup(Long id) {
+        if (id < 0) throw new IllegalArgumentException("id can't must be less zero!");
         groupDBService.deleteGroup(id);
     }
 

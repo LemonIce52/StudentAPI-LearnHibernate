@@ -27,6 +27,7 @@ public class StudentWebService {
     }
 
     public StudentDTO getStudent(Long id) {
+        if (id < 0) throw new IllegalArgumentException("id can't must be less zero!");
         Student studentDB = studentDBService.getStudent(id);
         return converterDTO.convertStudentToDto(studentDB);
     }
@@ -47,6 +48,7 @@ public class StudentWebService {
     }
 
     public void deleteStudent(Long id) {
+        if (id < 0) throw new IllegalArgumentException("id can't must be less zero!");
         studentDBService.deleteStudent(id);
     }
 
